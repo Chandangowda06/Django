@@ -1,0 +1,32 @@
+body{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    align-content: center;
+    background-color: rgb(254, 253, 254);
+    margin: 0;
+}
+.box{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    border-radius: 10px;
+    background-color: rgb(244, 234, 234);
+}
+
+form{
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
+    padding: 20px;
+}
+input[type="submit"]{
+    background-color: rgb(116, 108, 223);
+    color: whitesmoke;
+}
+h2{
+    text-align: center;
+   }

@@ -1,0 +1,132 @@
+<script>
+  $(document).ready(function() {
+    $(".add-btn").click(function() {
+        var category = $('#categoryid').val();
+        var model_name = $('#model_nameid').val();
+        var brand = $('#brandid').val();
+        var description = $('#descriptionid').val();
+        var color = $('#colorid').val();
+        var size = $('#sizeid').val();
+        var price = $('#priceid').val();
+        var gender = $('#genderid').val();
+        var stock = $('#stockid').val();
+        var imageFile = $('#imageid')[0].files[0];
+
+        var formData = new FormData();
+        formData.append('category', category);
+        formData.append('model_name', model_name);
+        formData.append('brand', brand);
+        formData.append('description', description);
+        formData.append('color', color);
+        formData.append('size', size);
+        formData.append('price', price);
+        formData.append('gender', gender);
+        formData.append('stock', stock);
+        formData.append('image', imageFile);
+        formData.append('create', 'create');
+        $.ajax({
+            url: '{% url "dashboard" %}',
+            type: 'POST',
+            data: formData,
+            processData: false,
+            contentType: false,
+            success: function(response){
+                if(response.success){
+                    console.log("Success");
+                    $('#categoryid').val('');
+                    $('#model_nameid').val('');
+                    $('#brandid').val('');
+                    $('#descriptionid').val('');
+                     $('#colorid').val('');
+                     $('#sizeid').val('');
+                    $('#priceid').val('');
+                    $('#genderid').val('');
+                    $('#stockid').val('');
+                    $('#imageid').val('');
+                     location.reload();
+                    
+                }
+                else{
+                    console.log("UnSuccess");
+                }
+            },
+            error: function(error) {
+                console.log("Data unsaved");
+            }
+        });
+       
+    });
+    $(".edit-btn").click(function(){
+        var category = $('#categoryeid').val();
+        var eid = $('#eid').val();
+        var model_name = $('#model_nameeid').val();
+        var brand = $('#brandeid').val();
+        var description = $('#descriptioneid').val();
+        var color = $('#coloreid').val();
+        var size = $('#sizeeid').val();
+        var price = $('#priceeid').val();
+        var gender = $('#gendereid').val();
+        var stock = $('#stockeid').val();
+        var imageFile = $('#imageeid')[0].files[0];
+
+        var formData = new FormData();
+        formData.append('category', category);
+        formData.append('model_name', model_name);
+        formData.append('brand', brand);
+        formData.append('description', description);
+        formData.append('color', color);
+        formData.append('size', size);
+        formData.append('price', price);
+        formData.append('gender', gender);
+        formData.append('stock', stock);
+        formData.append('image', imageFile);
+        formData.append('update', 'update');
+        formData.append('eid', eid);
+        $.ajax({
+            url: '{% url "dashboard" %}',
+            type: 'POST',
+            data: formData,
+            processData: false,
+            contentType: false,
+            success: function(response){
+                if(response.success){
+                    console.log("Success");
+                     location.reload();
+                    
+                }
+                else{
+                    console.log("UnSuccess");
+                }
+            },
+            error: function(error) {
+                console.log("Data unsaved");
+            }
+    });
+});
+$(".del-btn").click(function(){
+    var did = $('#did').val();
+    var formData = new FormData();
+    formData.append('did', did);
+    formData.append('delete', 'delete');
+    $.ajax({
+        url : "{% url 'dashboard' %}",
+        type: 'POST',
+        data:formData,
+        processData: false,
+        contentType: false,
+        success: function(response){
+            if(response.success == true){
+                console.log('Deleted');
+                location.reload();
+            }
+            else{
+                console.log("Unable to delete");
+            }
+        },
+        error: function(error){
+            console.log(error);
+        }
+    })
+});
+  });
+</script>

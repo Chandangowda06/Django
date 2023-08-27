@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Product List</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    
+    <table class="table-auto border-collapse border border-slate-400 m-6">
+        <caption class="caption-top">
+            <h2>Add Products</h2>
+        </caption>
+        <tr>
+            <th class="border border-slate-300">ID</th>
+            <th class="border border-slate-300">Category</th>
+            <th class="border border-slate-300">Model Name</th>
+            <th class="border border-slate-300">Brand</th>
+            <th class="border border-slate-300">Description</th>
+            <th class="border border-slate-300">Color</th>
+            <th class="border border-slate-300">Size</th>
+            <th class="border border-slate-300">Price</th>
+            <th class="border border-slate-300">Gender</th>
+            <th class="border border-slate-300">Image</th>
+            <th class="border border-slate-300">Stock</th>
+        </tr>
+        <tr>
+            <td class="border border-slate-300">{{products|length|add:1}}</td>
+            <td class="border border-slate-300"><input type="text" name="category" id="categoryid" placeholder="Product Category"></td>
+            <td class="border border-slate-300"><input type="text" name="model_name" id="model_nameid" placeholder="Model name"></td>
+            <td class="border border-slate-300"><input type="text" name="brand" id="brandid" placeholder="Brand"></td>
+            <td class="border border-slate-300"><input type="text" name="description" id="descriptionid" placeholder="Description"></td>
+            <td class="border border-slate-300"><input type="text" name="color" id="colorid" placeholder="Color"></td>
+            <td class="border border-slate-300"><input type="text" name="size" id="sizeid" placeholder="Size"></td>
+            <td class="border border-slate-300"><input type="text" name="price" id="priceid" placeholder="Price"></td>
+            <td class="border border-slate-300"> <select name="gender" id="genderid">
+                <option value="M">M</option>
+                <option value="F">F</option>
+                <option value="U">U</option>
+            </select></td>
+            <td class="border border-slate-300"> <input type="file" name="image" id="imageid" placeholder="Image"> </td>
+            <td class="border border-slate-300"><input type="text" name="stock" id="stockid" placeholder="stock"></td>
+        </tr>
+    </table>
+    <br>
+    
+
+<button class="transition ease-in-out delay-150 bg-blue-500 hover:-translate-y-1 hover:scale-110 hover:bg-indigo-500 duration-300 text-white p-2  ml-10 save-button">
+    Save Changes
+  </button>
+    
+    <table class="table-auto align-center" id="product-list-table">
+        <caption class="caption-top">
+            <h2>Product List</h2>
+          </caption>
+          <thead>
+        <tr>
+            <th class="border border-slate-300">ID</th>
+            <th class="border border-slate-300">Category</th>
+            <th class="border border-slate-300">Model Name</th>
+            <th class="border border-slate-300">Brand</th>
+            <th class="border border-slate-300">Description</th>
+            <th class="border border-slate-300">Color</th>
+            <th class="border border-slate-300">Size</th>
+            <th class="border border-slate-300">Price</th>
+            <th class="border border-slate-300">Gender</th>
+            <th class="border border-slate-300">Image</th>
+            <th class="border border-slate-300">Stock</th>
+            <th class="border border-slate-300">Modified</th>
+            <th class="border border-slate-300">Action</th>
+        </tr>
+    </thead>
+    <tbody id="tbody">
+        {% for product in products reversed %}
+        <tr>
+            <td class="border border-slate-300">{{ product.id }}</td>
+            <td class="border border-slate-300">{{ product.category }}</td>
+            <td class="border border-slate-300">{{ product.model_name }}</td>
+            <td class="border border-slate-300">{{ product.brand }}</td>
+            <td class="border border-slate-300">{{ product.description }}</td>
+            <td class="border border-slate-300">{{ product.color }}</td>
+            <td class="border border-slate-300">{{ product.size }}</td>
+            <td class="border border-slate-300">{{ product.price }}</td>
+            <td class="border border-slate-300">{{ product.gender }}</td>
+            <td class="border border-slate-300"><img src="{{ product.image.url }}" width="50" height="50"></td>
+            <td class="border border-slate-300">{{ product.stock }}</td>
+            <td class="border border-slate-300">{{ product.created_at }}</td>
+            <td class="border border-slate-300 align-center"><a class="transition ease-in-out delay-150 bg-yellow-500 hover:-translate-y-1 hover:scale-110 hover:bg-indigo-500 duration-300 text-white edit-button p-1">
+                Edit
+            </a>
+            <br>
+           <a class="transition ease-in-out delay-150 bg-red-500 hover:-translate-y-1 hover:scale-110 hover:bg-indigo-500 duration-300 text-white edit-button p-1 delete-button" href="{% url 'delete_product' product.id %}">
+                Delete
+              </a></td>
+        </tr>
+        {% endfor %}
+    </tbody>
+        </table>
+        {% include 'ajax.html'  %}
+</body>
+</html>

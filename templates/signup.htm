@@ -1,0 +1,34 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'signup.css' %}">
+    <title>signUp</title>
+</head>
+<body>
+   <div class="box">
+    <form action="{% url 'signup' %}" method="POST">
+        {% csrf_token %}
+        {% for msg in messages %}
+        <h5>{{msg}}</h5>
+        {% endfor %}
+        <h2>Sign Up</h2>
+        <label for="fname">First Name</label>
+        <input type="text" required name="fname">
+        <label for="lname">Last Name</label>
+        <input type="text" required name="lname">
+        <label for="age">Age</label>
+        <input type="number" required name="age">
+        <label for="email">emial</label>
+        <input type="email" name="email">
+        <label for="dept">Department</label>
+        <input type="text" required name="dept">
+        <label for="password">password</label>
+        <input type="password" name="password">
+        <input type="submit">
+    </form>
+   </div>
+</body>
+</html>
